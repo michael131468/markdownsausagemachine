@@ -9,7 +9,6 @@ from markdownsausagemachine.sausage_machine import SausageMachine
 from markdownsausagemachine.version import MYSTERY_MEAT_SCHEMA_VERSION
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
 class UnmetPromise(ValueError):

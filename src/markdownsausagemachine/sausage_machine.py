@@ -4,7 +4,6 @@ from pathlib import Path
 from markdownsausagemachine.document import Document
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
 class SausageMachine:

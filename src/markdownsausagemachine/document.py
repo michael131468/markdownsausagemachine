@@ -4,7 +4,6 @@ from collections.abc import Collection
 from typing import Self
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
 class SectionContent(ABC):
