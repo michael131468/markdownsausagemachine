@@ -1,4 +1,5 @@
 import logging
+from abc import ABC, abstractmethod
 from collections.abc import Collection
 from typing import Self
 
@@ -6,11 +7,11 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
-class SectionContent:
+class SectionContent(ABC):
     """Base class for document section contents"""
 
-    def get_markdown(self) -> str:
-        raise NotImplementedError()
+    @abstractmethod
+    def get_markdown(self) -> str: ...
 
 
 class UnacceptableDocumentFilename(ValueError):
