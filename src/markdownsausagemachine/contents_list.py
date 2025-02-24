@@ -1,6 +1,6 @@
-import textwrap
 from collections.abc import Collection
 
+from markdownsausagemachine.contents_paragraph import Paragraph
 from markdownsausagemachine.document import SectionContent
 
 
@@ -11,14 +11,13 @@ class UnorderedList(SectionContent):
     def get_markdown(self) -> str:
         markdown = ""
         for i, item in enumerate(self.items):
-            wrapped_item = textwrap.fill(
-                item,
-                width=78,
-                break_long_words=False,
-                tabsize=4,
-                subsequent_indent="  ",
-            )
-            markdown += f"* {wrapped_item}"
+            if isinstance(item, str):
+                item = Paragraph(item)
+                item.initial_indent = f"*   "
+                item.subsequent_indent = f"{' '*len(item.initial_indent)}"
+                markdown += item.get_markdown()
+            else:
+                raise ValueError(f"Unsupported list item type: {type(item)}")
             # Add some separation between items
             if i != len(self.items) - 1:
                 markdown += "\n"
@@ -32,14 +31,13 @@ class OrderedList(SectionContent):
     def get_markdown(self) -> str:
         markdown = ""
         for i, item in enumerate(self.items):
-            wrapped_item = textwrap.fill(
-                item,
-                width=78,
-                break_long_words=False,
-                tabsize=4,
-                subsequent_indent="  ",
-            )
-            markdown += f"{i+1}. {wrapped_item}"
+            if isinstance(item, str):
+                item = Paragraph(item)
+                item.initial_indent = f"{i+1}.  "
+                item.subsequent_indent = f"{' '*len(item.initial_indent)}"
+                markdown += item.get_markdown()
+            else:
+                raise ValueError(f"Unsupported list item type: {type(item)}")
             # Add some separation between items
             if i != len(self.items) - 1:
                 markdown += "\n"
