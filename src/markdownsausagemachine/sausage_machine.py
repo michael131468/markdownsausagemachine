@@ -25,7 +25,7 @@ class SausageMachine:
     def output_markdown_documents(self, directory: Path) -> None:
         directory.mkdir(parents=True, exist_ok=True)
         for document in self.documents.values():
-            output_file = directory / document.filename
+            output_file = directory / f"{document.filename}.md"
             logger.info("Generating file: %s", output_file)
             markdown = document.get_markdown()
             with output_file.open("w") as f:
