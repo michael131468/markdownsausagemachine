@@ -2,9 +2,10 @@ from abc import abstractmethod
 from collections.abc import Collection
 
 from markdownsausagemachine.contents_paragraph import Paragraph
+from markdownsausagemachine.contents_codeblock import CodeBlock
 from markdownsausagemachine.document import SectionContent
 
-type ListItem = str | Paragraph
+type ListItem = str | Paragraph | CodeBlock
 
 
 class MarkdownList(SectionContent):
@@ -27,6 +28,10 @@ class MarkdownList(SectionContent):
                 item.subsequent_indent = f"{' '*len(item.initial_indent)}"
                 markdown += item.get_markdown()
             elif isinstance(item, Paragraph):
+                item.initial_indent = initial_indent
+                item.subsequent_indent = f"{' '*len(item.initial_indent)}"
+                markdown += item.get_markdown()
+            elif isinstance(item, CodeBlock):
                 item.initial_indent = initial_indent
                 item.subsequent_indent = f"{' '*len(item.initial_indent)}"
                 markdown += item.get_markdown()
