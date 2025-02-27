@@ -17,6 +17,25 @@ class UnacceptableDocumentFilename(ValueError):
     """Exception class for handling validation of a document filename"""
 
 
+class DocumentLink:
+    def __init__(self, text: str, target: str, link_id: str) -> None:
+        self.text = text
+        self.target = target
+        self.link_id = link_id
+
+    def get_markdown(self) -> str:
+        return str(self)
+
+    def get_footnote_markdown(self) -> str:
+        return f"[{self.link_id}]: {self.target}"
+
+    def __repr__(self) -> str:
+        return f"[{self.text}][{self.link_id}]"
+
+    def __str__(self) -> str:
+        return f"[{self.text}][{self.link_id}]"
+
+
 class DocumentSection:
     def __init__(self, header: str, depth: int = 0) -> None:
         self.depth = depth
@@ -69,6 +88,7 @@ class Document:
         # https://academia.stackexchange.com/questions/162433/what-is-the-name-of-the-text-that-might-exist-after-the-chapter-heading-and-befo
         self.lede = ""
         self.sections: list[DocumentSection] = []
+        self.links: Mapping[str, DocumentLink] = {}
 
     def set_header(self, header: str) -> None:
         self.header = header
@@ -81,6 +101,12 @@ class Document:
         self.sections.append(new_section)
         return new_section
 
+    def add_link(self, text: str, target: str) -> DocumentLink:
+        new_id = str(len(self.links.values()))
+        new_link = DocumentLink(text, target, new_id)
+        self.links[new_id] = new_link
+        return new_link
+
     def get_markdown(self) -> str:
         # Generate document header
         markdown = f"# {self.header}"
@@ -88,12 +114,23 @@ class Document:
             markdown += f"\n\n{self.lede}"
         if len(self.sections) > 0:
             markdown += "\n\n"
+
         # Generate contents of document
         for i, section in enumerate(self.sections):
             markdown += section.get_markdown()
             # Add some separation between sections
             if i != len(self.sections) - 1:
                 markdown += "\n\n"
+
+        # Generate footnotes of link targets if any added to document
+        if len(self.links.values()) > 0:
+            markdown += "\n\n"
+            for i, link in enumerate(self.links.values()):
+                markdown += link.get_footnote_markdown()
+                # Add newline between links
+                if i != len(self.links.values()) - 1:
+                    markdown += "\n"
+
         # End document with an empty line
         markdown += "\n"
         return markdown
