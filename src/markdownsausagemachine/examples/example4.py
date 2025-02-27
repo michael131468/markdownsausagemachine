@@ -20,14 +20,10 @@ def generate_example() -> None:
     new_section = index_doc.add_section("sausage-code")
     new_section.set_header("Sausage Code")
     new_section.add_content(Paragraph("Here is a representation of a code block:"))
+    new_section.add_content(CodeBlock("#!/bin/bash\n" "\n" 'echo "Hello Sausage!"'))
     new_section.add_content(
-        CodeBlock(
-            "#!/bin/bash\n"
-            "\n"
-            "echo \"Hello Sausage!\""
-        )
+        Paragraph("Here is a representation of a code block in a list:")
     )
-    new_section.add_content(Paragraph("Here is a representation of a code block in a list:"))
     new_section.add_content(
         UnorderedList(
             [
