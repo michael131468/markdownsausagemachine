@@ -5,7 +5,7 @@ from markdownsausagemachine.contents_codeblock import CodeBlock
 from markdownsausagemachine.contents_paragraph import Paragraph
 from markdownsausagemachine.document import SectionContent
 
-type ListItem = str | Paragraph | CodeBlock
+type ListItem = str | Paragraph | CodeBlock | MarkdownList
 
 
 class MarkdownList(SectionContent):
@@ -20,23 +20,40 @@ class MarkdownList(SectionContent):
 
     def get_markdown(self) -> str:
         markdown = ""
+
+        # Cannot use enumeration here because not nested lists should not be
+        # counted.
+        item_no = 0
         for i, item in enumerate(self.items):
-            initial_indent = self.get_initial_indent(i)
-            if isinstance(item, str):
-                item = Paragraph(item)
-                item.initial_indent = initial_indent
-                item.subsequent_indent = f"{' '*len(item.initial_indent)}"
-                markdown += item.get_markdown()
-            elif isinstance(item, Paragraph):
-                item.initial_indent = initial_indent
-                item.subsequent_indent = f"{' '*len(item.initial_indent)}"
-                markdown += item.get_markdown()
-            elif isinstance(item, CodeBlock):
-                item.initial_indent = initial_indent
-                item.subsequent_indent = f"{' '*len(item.initial_indent)}"
-                markdown += item.get_markdown()
+            # Pre-calculate the indentation of the item
+            initial_indent = self.get_initial_indent(item_no)
+            subsequent_indent = f"{' '*len(initial_indent)}"
+
+            # Update list items attributes to inform them they are indented in a
+            # list before capturing their equivalent markdown
+            if isinstance(item, MarkdownList):
+                item.nesting_level = self.nesting_level + 1
             else:
-                raise ValueError(f"Unsupported list item type: {type(item)}")
+                item_no = item_no + 1
+                if isinstance(item, str):
+                    # Sneaky hack: replace the string item with a Paragraph to
+                    # reuse its Paragraph indentation logic and provide still
+                    # the simplified interface of basic strings to users.
+                    item = Paragraph(item)
+                    item.initial_indent = initial_indent
+                    item.subsequent_indent = subsequent_indent
+                elif isinstance(item, Paragraph):
+                    item.initial_indent = initial_indent
+                    item.subsequent_indent = subsequent_indent
+                elif isinstance(item, CodeBlock):
+                    item.initial_indent = initial_indent
+                    item.subsequent_indent = subsequent_indent
+                else:
+                    raise ValueError(f"Unsupported list item: {type(item)}")
+
+            # Get the items markdown
+            markdown += item.get_markdown()
+
             # Add some separation between items
             if i != len(self.items) - 1:
                 markdown += "\n"
