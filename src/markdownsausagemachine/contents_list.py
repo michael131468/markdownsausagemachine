@@ -1,8 +1,8 @@
 from abc import abstractmethod
 from collections.abc import Collection
 
-from markdownsausagemachine.contents_paragraph import Paragraph
 from markdownsausagemachine.contents_codeblock import CodeBlock
+from markdownsausagemachine.contents_paragraph import Paragraph
 from markdownsausagemachine.document import SectionContent
 
 type ListItem = str | Paragraph | CodeBlock

@@ -3,7 +3,7 @@
 import logging
 from pathlib import Path
 
-from markdownsausagemachine.contents import Paragraph, UnorderedList, CodeBlock
+from markdownsausagemachine.contents import CodeBlock, Paragraph, UnorderedList
 from markdownsausagemachine.sausage_machine import SausageMachine
 
 logger = logging.getLogger(__name__)
