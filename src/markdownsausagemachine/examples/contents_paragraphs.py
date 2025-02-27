@@ -11,14 +11,14 @@ logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
 def generate_example_one() -> None:
-    logger.info("Generating example1...")
+    logger.info("Generating example...")
 
     my_sausage_machine = SausageMachine()
     index_doc = my_sausage_machine.add_document("index")
     index_doc.set_header("Index")
     index_doc.set_lede("A small document preamble.")
-    new_section = index_doc.add_section("my-sausage-machine")
-    new_section.set_header("My Sausage Machine")
+
+    new_section = index_doc.add_section("My Sausage Machine")
     new_section.add_content(
         Paragraph("P1: How does a sausage machine become a reality")
     )
@@ -42,7 +42,7 @@ def generate_example_one() -> None:
     new_section.add_content(Paragraph("P2: Up Down Left Right"))
     new_section.add_content(Paragraph("P3: Music Dance Sunshine"))
 
-    output_dir = Path("./outputs/example1")
+    output_dir = Path("./outputs/contents_paragraphs")
     output_dir.mkdir(parents=True, exist_ok=True)
     my_sausage_machine.output_markdown_documents(output_dir)
     logger.info("Done! Output created in: %s", output_dir)

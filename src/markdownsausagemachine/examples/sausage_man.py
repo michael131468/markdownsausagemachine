@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
-def generate_example_two() -> None:
+def generate_example() -> None:
     example_mystery_meat = {
         "schema": "0.1",
         "documents": {
@@ -87,7 +87,7 @@ def generate_example_two() -> None:
     if not promises_met:
         logger.error("Not all required promises were kept. Ingredients are not good!")
 
-    output_dir = Path("./outputs/example2")
+    output_dir = Path("./outputs/sausage_man")
     output_dir.mkdir(parents=True, exist_ok=True)
     my_sausage_man.get_markdown_files(output_dir)
     logger.info("Done! Output created in: %s", output_dir)

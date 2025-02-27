@@ -11,14 +11,14 @@ logging.basicConfig(encoding="utf-8", level=logging.DEBUG)
 
 
 def generate_example_one() -> None:
-    logger.info("Generating example3...")
+    logger.info("Generating example...")
 
     my_sausage_machine = SausageMachine()
     index_doc = my_sausage_machine.add_document("sausages")
     index_doc.set_header("Sausages")
     index_doc.set_lede("There are many sausage types in this world.")
-    new_section = index_doc.add_section("sausage-types")
-    new_section.set_header("Sausage Types")
+
+    new_section = index_doc.add_section("Sausage Types")
     new_section.add_content(Paragraph("Here are some sausage types:"))
     new_section.add_content(
         UnorderedList(
@@ -85,7 +85,7 @@ def generate_example_one() -> None:
         )
     )
 
-    output_dir = Path("./outputs/example3")
+    output_dir = Path("./outputs/contents_lists")
     output_dir.mkdir(parents=True, exist_ok=True)
     my_sausage_machine.output_markdown_documents(output_dir)
     logger.info("Done! Output created in: %s", output_dir)
