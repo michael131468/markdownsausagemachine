@@ -24,6 +24,14 @@ check-formatting = {composite = [
     "isort --check --settings-path ./pyproject.toml src/ tests/",
     "toml-sort --check ./pyproject.toml",
 ]}
+examples = {composite = [
+    "src/markdownsausagemachine/examples/contents_codeblocks.py",
+    "src/markdownsausagemachine/examples/contents_lists.py",
+    "src/markdownsausagemachine/examples/contents_paragraphs.py",
+    "src/markdownsausagemachine/examples/document_links.py",
+    "src/markdownsausagemachine/examples/documents.py",
+    "src/markdownsausagemachine/examples/sausage_man.py",
+]}
 format = {composite = [
     "black src/ tests/",
     "isort --settings-path ./pyproject.toml src/ tests/",
