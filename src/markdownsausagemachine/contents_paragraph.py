@@ -19,4 +19,5 @@ class Paragraph(SectionContent):
             subsequent_indent=self.subsequent_indent,
             tabsize=4,
             break_long_words=False,
+            replace_whitespace=False,
         )
