@@ -94,4 +94,4 @@ def generate_example() -> None:
 
 
 if __name__ == "__main__":
-    generate_example_two()
+    generate_example()
