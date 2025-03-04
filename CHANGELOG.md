@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.2.1] - 2025-03-04
+
+### Added
+
+- Support for nesting lists
+- Support for links in documents
+- New examples added
+
+### Changed
+
+- Examples refactored
+
+### Fixed
+
+- Fixed formatting of sources
+- Fixed handling of newlines in Paragraphs
+
 ## [v0.2.0] - 2025-02-25
 
 ### Added
