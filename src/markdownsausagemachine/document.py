@@ -88,7 +88,7 @@ class Document:
         # https://academia.stackexchange.com/questions/162433/what-is-the-name-of-the-text-that-might-exist-after-the-chapter-heading-and-befo
         self.lede = ""
         self.sections: list[DocumentSection] = []
-        self.links: Mapping[str, DocumentLink] = {}
+        self.links: dict[str, DocumentLink] = {}
 
     def set_header(self, header: str) -> None:
         self.header = header
