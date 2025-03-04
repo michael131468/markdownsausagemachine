@@ -42,10 +42,7 @@ class MarkdownList(SectionContent):
                     item = Paragraph(item)
                     item.initial_indent = initial_indent
                     item.subsequent_indent = subsequent_indent
-                elif isinstance(item, Paragraph):
-                    item.initial_indent = initial_indent
-                    item.subsequent_indent = subsequent_indent
-                elif isinstance(item, CodeBlock):
+                elif isinstance(item, CodeBlock | Paragraph):
                     item.initial_indent = initial_indent
                     item.subsequent_indent = subsequent_indent
                 else:
