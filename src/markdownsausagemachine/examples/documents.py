@@ -26,17 +26,13 @@ def generate_example() -> None:
     supp_doc.set_header("Supplementary Words")
     supp_doc.set_lede("Some supplementary words.")
     new_section = supp_doc.add_section("Word List")
-    new_section.add_content(
-        Paragraph("Tree\n\nFlower\n\nSoil")
-    )
+    new_section.add_content(Paragraph("Tree\n\nFlower\n\nSoil"))
 
     extras_doc = my_sausage_machine.add_document("extra-words")
     extras_doc.set_header("Extra Words")
     extras_doc.set_lede("Some extra words.")
     new_section = extras_doc.add_section("Word List")
-    new_section.add_content(
-        Paragraph("Water\n\nFire\n\nAir")
-    )
+    new_section.add_content(Paragraph("Water\n\nFire\n\nAir"))
 
     output_dir = Path("./outputs/documents")
     output_dir.mkdir(parents=True, exist_ok=True)
