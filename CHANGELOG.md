@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.2.2] - 2025-03-04
+
+### Added
+
+- The py.typed file is now present for mypy usage
+
+### Fixed
+
+- Linter and formatter fixes applied.
+
 ## [v0.2.1] - 2025-03-04
 
 ### Added
