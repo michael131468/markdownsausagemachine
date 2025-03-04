@@ -1,5 +1,3 @@
-import textwrap
-
 from markdownsausagemachine.document import SectionContent
 
 
