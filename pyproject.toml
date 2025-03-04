@@ -12,7 +12,7 @@ license = {text = "MIT"}
 name = "markdownsausagemachine"
 readme = "README.md"
 requires-python = ">=3.11"
-version = "0.2.0"
+version = "0.2.1"
 
 [tool.pdm]
 distribution = true
