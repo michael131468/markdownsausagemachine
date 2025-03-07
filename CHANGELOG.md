@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.2.3] - 2025-03-07
+
+### Fixed
+
+- Removed unneeded dependency on markdown wheel.
+
 ## [v0.2.2] - 2025-03-04
 
 ### Added
