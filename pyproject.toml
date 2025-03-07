@@ -6,7 +6,7 @@ requires = ["pdm-backend"]
 authors = [
     {name = "Michael Ho", email = "michael.ho@ieee.org"},
 ]
-dependencies = ["markdown>=3.7"]
+dependencies = []
 description = "A library to creates markdown documents programatically"
 license = {text = "MIT"}
 name = "markdownsausagemachine"
